@@ -1,0 +1,23 @@
+name: deploy a docker image to an Azure Web App
+
+permissions:
+  contents: 'read'
+  packages: 'write'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+        with:
+          app-name: ${{ env.DEVWEBAPP }}
+          publish-profile: ${{ secrets.DEVNWEBAPP }}
+          images: 'nikhatsultana/spc:1.0'
+      - name: run command in container
+        run: 'httpd-foreground'
