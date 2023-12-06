@@ -4,13 +4,15 @@ on:
   push:
     branches:
       - main
+      - dev
+      - prod
+      - stage
 
 permissions:
   contents: 'read'
   packages: 'write'
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     environment:
@@ -18,10 +20,14 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
-        with:
-          app-name: ${{ env.DEVNPRODWEBAPP }}
-          publish-profile: ${{ secrets.DEVNWEBAPP }}
-          images: 'nikhatsultana/spc:1.0'
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Deploy to development
+      if: github.ref == 'refs/heads/dev'
+      run: ./devwebapp.yaml
+    - name: Deploy to stage
+      if: github.ref == 'refs/heads/stage'
+      run: ./stage_webapp.yaml
+    - name: Deploy to stage
+      if: github.ref == 'refs/heads/stage'
+      run: ./prod_webapp.yaml
