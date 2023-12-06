@@ -16,8 +16,8 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
         with:
-          app-name: ${{ env.PRODWEBAPP }}
-          publish-profile: ${{ secrets.DEVNPRODWEBAPP }}
+          app-name: ${{ env.STAGEWEBAPP }}
+          publish-profile: ${{ secrets.STAGEWEBAPP }}
           images: 'nirulabs/tea:latest'
       - name: run command in container
         run: 'httpd-foreground'
