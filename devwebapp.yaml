@@ -18,6 +18,6 @@ jobs:
         with:
           app-name: ${{ env.DEVWEBAPP }}
           publish-profile: ${{ secrets.DEVNWEBAPP }}
-          images: 'nikhatsultana/spc:1.0'
+          images: 'nirulabs/tea:latest'
       - name: run command in container
         run: 'httpd-foreground'
