@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
     - name: Deploy to Dev
     - uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
       with:
