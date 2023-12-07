@@ -18,6 +18,6 @@ jobs:
         publish-profile: ${{ secrets.DEV_DUP_WEBAPP }}
         images: 'nirulabs/tea:latest'
     - name: run command in container
-      run: 'httpd-foreground'
+    - run: 'httpd-foreground'
           
         
