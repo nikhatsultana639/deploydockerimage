@@ -15,6 +15,6 @@ jobs:
         app-name: ${{ env.DEVWEBAPP }}
         publish-profile: ${{ secrets.DEV_DUP_WEBAPP }}
         images: 'nirulabs/tea:latest'
-    - name: run the command
-      run: 'httpd-foreground'  
+        package: .
+        startup-command:: 'httpd-foreground'  
         
