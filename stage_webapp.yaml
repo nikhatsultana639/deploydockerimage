@@ -1,5 +1,7 @@
 name: deploy a docker image to an Azure Web App
-
+on:
+  push:
+    branches: [ "stage" ]
 permissions:
   contents: 'read'
   packages: 'write'
@@ -19,5 +21,5 @@ jobs:
           app-name: ${{ env.STAGEWEBAPP }}
           publish-profile: ${{ secrets.STAGEWEBAPP }}
           images: 'nirulabs/tea:latest'
-      - name: run command in container
-        run: 'httpd-foreground'
+          package: .
+          startup-command: 'httpd-foreground'
