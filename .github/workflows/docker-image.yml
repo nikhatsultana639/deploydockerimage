@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: deploy the Docker image
+      app-name: ${{ env.DEVWEBAPP }}
+          publish-profile: ${{ secrets.DEVNWEBAPP }}
+          images: 'nirulabs/tea:latest'
+      - name: run command in container
+        run: 'httpd-foreground'
+          
+        
