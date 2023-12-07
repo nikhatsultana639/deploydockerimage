@@ -18,11 +18,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Deploy to Prod
-      uses: ./prod_webapp.yaml 
-      with:
-        appName: prod-nwebapp
-        containers: nirulabs/coffee:latest
-        containerCommand: httpd-foreground
+      run: ./prod_webapp.yaml 
 
   deploy_to_dev:
     runs-on: ubuntu-latest
@@ -33,11 +29,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Deploy to Dev
-      uses: ./devwebapp.yaml  
-      with:
-        appName: dev-nappservice
-        containers: nirulabs/tea:latest
-        containerCommand: httpd-foreground
+      run: ./devwebapp.yaml  
+      
 
   deploy_to_stage:
     runs-on: ubuntu-latest
@@ -48,8 +41,4 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Deploy to Stage
-      uses: ./stage_webapp.yaml  
-      with:
-        appName: stage-nwebapp
-        containers: nirulabs/tea:latest
-        containerCommand: httpd-foreground
+      run: ./stage_webapp.yaml  
