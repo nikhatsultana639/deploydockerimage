@@ -19,5 +19,4 @@ jobs:
           app-name: ${{ env.DEVWEBAPP }}
           publish-profile: ${{ secrets.DEVNWEBAPP }}
           images: 'nirulabs/coffee:latest'
-      - name: run command in container
-        run: 'httpd-foreground'
+          startup-command: 'httpd-foreground'
