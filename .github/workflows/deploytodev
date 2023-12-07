@@ -1,0 +1,24 @@
+name: deploy a docker image to an Azure Web App
+
+on:
+  push:
+    branches: [ "dev" ]
+
+permissions:
+  contents: 'read'
+  packages: 'write'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+        with:
+          app-name: ${{ env.DEVWEBAPP }}
+          publish-profile: ${{ secrets.DEVNWEBAPP }}
+          images: 'nirulabs/coffee:latest'
+          package: .
+          startup-command: 'httpd-foreground'
