@@ -13,10 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: deploy the Docker image
-      app-name: ${{ env.DEVWEBAPP }}
-          publish-profile: ${{ secrets.DEVNWEBAPP }}
-          images: 'nirulabs/tea:latest'
-      - name: run command in container
-        run: 'httpd-foreground'
+      with:
+        app-name: ${{ env.DEVWEBAPP }}
+        publish-profile: ${{ secrets.DEV_DUP_WEBAPP }}
+        images: 'nirulabs/tea:latest'
+    - name: run command in container
+      run: 'httpd-foreground'
           
         
