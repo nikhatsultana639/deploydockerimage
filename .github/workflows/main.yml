@@ -1,33 +1,55 @@
-name: deploy a docker image to an Azure Web App
+name: Deploy to Azure App Service
 
 on:
   push:
     branches:
       - main
-      - dev
       - prod
+      - dev
       - stage
 
-permissions:
-  contents: 'read'
-  packages: 'write'
-
 jobs:
-  deploy:
+  deploy_to_prod:
     runs-on: ubuntu-latest
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    if: github.event_name == 'push' && github.event.ref == 'refs/heads/prod'
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Deploy to development
-      if: github.ref == 'refs/heads/dev'
-      run: ./devwebapp.yaml
-    - name: Deploy to stage
-      if: github.ref == 'refs/heads/stage'
-      run: ./stage_webapp.yaml
-    - name: Deploy to stage
-      if: github.ref == 'refs/heads/stage'
-      run: ./prod_webapp.yaml
+
+    - name: Deploy to Prod
+      uses: ./prod_webapp.yaml 
+      with:
+        appName: prod-nwebapp
+        containers: nirulabs/coffee:latest
+        containerCommand: httpd-foreground
+
+  deploy_to_dev:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.event.ref == 'refs/heads/dev'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to Dev
+      uses: ./devwebapp.yaml  
+      with:
+        appName: dev-nappservice
+        containers: nirulabs/tea:latest
+        containerCommand: httpd-foreground
+
+  deploy_to_stage:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.event.ref == 'refs/heads/stage'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to Stage
+      uses: ./stage_webapp.yaml  
+      with:
+        appName: stage-nwebapp
+        containers: nirulabs/tea:latest
+        containerCommand: httpd-foreground
