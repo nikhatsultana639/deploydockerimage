@@ -11,13 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
     - name: deploy the Docker image
+    - uses: actions/deploy-docker@v1.0.1
       with:
         app-name: ${{ env.DEVWEBAPP }}
         publish-profile: ${{ secrets.DEV_DUP_WEBAPP }}
         images: 'nirulabs/tea:latest'
-    - name: run command in container
-    - run: 'httpd-foreground'
+        containerCommand: httpd-foreground
           
         
