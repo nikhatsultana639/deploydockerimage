@@ -1,5 +1,7 @@
 name: deploy a docker image to an Azure Web App
-
+on:
+  push:
+    branches: [ "prod" ]
 permissions:
   contents: 'read'
   packages: 'write'
@@ -7,9 +9,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Deploy to Azure Web App
@@ -19,5 +18,5 @@ jobs:
           app-name: ${{ env.PRODWEBAPP }}
           publish-profile: ${{ secrets.DEVNPRODWEBAPP }}
           images: 'nirulabs/tea:latest'
-      - name: run command in container
-        run: 'httpd-foreground'
+          package: .
+          startup-command: 'httpd-foreground'
