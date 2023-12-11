@@ -1,4 +1,12 @@
 name: deploy a docker image to an Azure Web App
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  contents: 'read'
+  packages: 'write'
 
 jobs:
   deploy:
@@ -13,4 +21,5 @@ jobs:
           publish-profile: ${{ secrets.DEVNWEBAPP }}
           images: 'nirulabs/coffee:latest'
           package: .
+          startup-command: 'httpd-foreground'
         
