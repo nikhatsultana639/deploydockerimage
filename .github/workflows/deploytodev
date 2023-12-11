@@ -1,13 +1,5 @@
 name: deploy a docker image to an Azure Web App
 
-on:
-  push:
-    branches: [ "dev" ]
-
-permissions:
-  contents: 'read'
-  packages: 'write'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
