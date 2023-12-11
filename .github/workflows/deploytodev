@@ -21,4 +21,4 @@ jobs:
           publish-profile: ${{ secrets.DEVNWEBAPP }}
           images: 'nirulabs/coffee:latest'
           package: .
-          startup-command: 'httpd-foreground'
+        
