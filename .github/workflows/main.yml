@@ -21,7 +21,7 @@ jobs:
 
     - name: Deploy to Prod
       run: |
-       ./github/workflows/deploytoprod
+       sh -c './github/workflows/deploytoprod'
 
   deploy_to_dev:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
         
     - name: Deploy to Dev
       run: |
-        ./github/workflows/deploytodev
+        sh - './github/workflows/deploytodev'
       
 
   deploy_to_stage:
@@ -50,4 +50,4 @@ jobs:
 
     - name: Deploy to Stage
       run: |
-        ./github/workflows/deploytostage 
+        sh -c './github/workflows/deploytostage' 
