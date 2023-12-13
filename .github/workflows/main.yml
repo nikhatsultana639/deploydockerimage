@@ -19,9 +19,15 @@ jobs:
       with:
         ref: prod
 
-    - name: Deploy to Prod
-      run: |
-       sh -c './.github/workflows/deploytoprod'
+    - name: Deploy to Azure Web App
+      id: deploy-to-prodwebapp
+      uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+      with:
+        app-name: ${{ env.PRODWEBAPP }}
+        publish-profile: ${{ secrets.DEVNPRODWEBAPP }}
+        images: 'nirulabs/tea:latest'
+        package: .
+        startup-command: 'httpd-foreground'
 
   deploy_to_dev:
     runs-on: ubuntu-latest
@@ -32,10 +38,16 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: dev
-        
+
     - name: Deploy to Dev
-      run: |
-        sh - './.github/workflows/deploytodev'
+      id: deploy-to-devwebapp
+      uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+      with:
+        app-name: ${{ env.DEVWEBAPP }}
+        publish-profile: ${{ secrets.DEV_DUP_WEBAPP }}
+        images: 'nirulabs/tea:latest'
+        package: .
+        startup-command:: 'httpd-foreground'
       
 
   deploy_to_stage:
@@ -48,6 +60,12 @@ jobs:
       with:
         ref: stage
 
-    - name: Deploy to Stage
-      run: |
-        sh -c './.github/workflows/deploytostage' 
+    - name: Deploy to Azure Web App
+      id: deploy-to-stagewebapp
+      uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+      with:
+        app-name: ${{ env.STAGEWEBAPP }}
+        publish-profile: ${{ secrets.STAGEWEBAPP }}
+        images: 'nirulabs/tea:latest'
+        package: .
+        startup-command: 'httpd-foreground'
