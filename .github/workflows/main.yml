@@ -3,7 +3,6 @@ name: Deploy to Azure App Service
 on:
   push:
     branches:
-      - main
       - prod
       - dev
       - stage
