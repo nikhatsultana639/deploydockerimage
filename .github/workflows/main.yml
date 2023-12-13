@@ -3,10 +3,10 @@ name: Deploy to Azure App Service
 on:
   push:
     branches:
-      - main
-      - prod
-      - dev
-      - stage
+      - 'main'
+      - 'prod'
+      - 'dev'
+      - 'stage'
 
 jobs:
   deploy_to_prod:
@@ -15,9 +15,9 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        ref: prod
+        ref: 'prod'
 
     - name: Deploy to Azure Web App
       id: deploy-to-prodwebapp
@@ -35,9 +35,9 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        ref: dev
+        ref: 'dev'
 
     - name: Deploy to Dev
       id: deploy-to-devwebapp
@@ -56,9 +56,9 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        ref: stage
+        ref: 'stage'
 
     - name: Deploy to Azure Web App
       id: deploy-to-stagewebapp
