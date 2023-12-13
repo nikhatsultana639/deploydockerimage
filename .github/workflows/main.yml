@@ -14,11 +14,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/prod' }}
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        ref: 'prod'
-
     - name: Deploy to Azure Web App
       id: deploy-to-prodwebapp
       uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
@@ -34,11 +29,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/dev' }}
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        ref: 'dev'
-
     - name: Deploy to Dev
       id: deploy-to-devwebapp
       uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
@@ -55,11 +45,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/stage' }}
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        ref: 'stage'
-
     - name: Deploy to Azure Web App
       id: deploy-to-stagewebapp
       uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
