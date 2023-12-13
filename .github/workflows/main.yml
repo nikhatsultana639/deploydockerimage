@@ -36,7 +36,7 @@ jobs:
         publish-profile: ${{ secrets.DEV_DUP_WEBAPP }}
         images: 'nirulabs/tea:latest'
         package: .
-        startup-command:: 'httpd-foreground'
+        startup-command: 'httpd-foreground'
       
 
   deploy_to_stage:
