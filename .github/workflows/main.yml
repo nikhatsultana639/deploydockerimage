@@ -3,15 +3,15 @@ name: Deploy to Azure App Service
 on:
   push:
     branches:
-      - 'main'
-      - 'prod'
-      - 'dev'
-      - 'stage'
+      - main
+      - prod
+      - dev
+      - stage
 
 jobs:
   deploy_to_prod:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.event.ref == 'refs/heads/prod'
+    if: ${{ github.ref == 'refs/heads/prod' }}
 
     steps:
     - name: Checkout repository
@@ -31,7 +31,7 @@ jobs:
 
   deploy_to_dev:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.event.ref == 'refs/heads/dev'
+    if: ${{ github.ref == 'refs/heads/dev' }}
 
     steps:
     - name: Checkout repository
@@ -52,7 +52,7 @@ jobs:
 
   deploy_to_stage:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.event.ref == 'refs/heads/stage'
+    if: ${{ github.ref == 'refs/heads/stage' }}
 
     steps:
     - name: Checkout repository
