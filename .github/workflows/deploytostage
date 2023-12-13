@@ -20,6 +20,6 @@ jobs:
         with:
           app-name: ${{ env.STAGEWEBAPP }}
           publish-profile: ${{ secrets.STAGEWEBAPP }}
-          images: 'nirulabs/coffee:latest'
+          images: 'nirulabs/tea:latest'
           package: .
           startup-command: 'httpd-foreground'
