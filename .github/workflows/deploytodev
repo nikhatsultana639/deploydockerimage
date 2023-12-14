@@ -14,7 +14,7 @@ jobs:
         with:
           app-name: ${{ env.DEVWEBAPP }}
           publish-profile: ${{ secrets.DEVNWEBAPP }}
-          images: 'nirulabs/tea:latest'
+          images: 'nirulabs/coffee:latest'
           package: .
           startup-command: 'httpd-foreground'
         
