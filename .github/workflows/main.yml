@@ -3,9 +3,9 @@ name: Deploy to Azure App Service
 on:
   push:
     branches:
-      - prod
-      - dev
-      - stage
+      - 'prod'
+      - 'dev'
+      - 'stage'
 
 jobs:
   deploy_to_prod:
