@@ -10,7 +10,7 @@ on:
 jobs:
   deploy_to_prod:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/prod' }}
+    if: ${{ github.event_name == 'push' && github.ref == refs/heads/prod }}
 
     steps:
     - name: Deploy to Azure Web App
@@ -25,7 +25,7 @@ jobs:
 
   deploy_to_dev:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/dev' }}
+    if: ${{ github.event_name == 'push' && github.ref == refs/heads/dev }}
 
     steps:
     - name: Deploy to Dev
@@ -41,7 +41,7 @@ jobs:
 
   deploy_to_stage:
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/stage' }}
+    if: ${{ github.event_name == 'push' && github.ref == refs/heads/stage }}
 
     steps:
     - name: Deploy to Azure Web App
