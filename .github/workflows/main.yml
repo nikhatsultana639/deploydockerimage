@@ -6,6 +6,7 @@ on:
       - prod
       - dev
       - stage
+      - main
 
 jobs:
   deploy_to_prod:
