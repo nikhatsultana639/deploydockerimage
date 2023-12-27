@@ -1,8 +1,8 @@
 name: deploy a docker image to an Azure Web App
 on:
   push:
-    branches:
-      - dev
+    branches: 
+    - 'dev'
 jobs:
   deploy:
     runs-on: ubuntu-latest
