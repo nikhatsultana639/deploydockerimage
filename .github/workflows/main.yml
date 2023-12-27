@@ -3,9 +3,9 @@ name: Deploy to Azure App Service
 on:
   push:
     branches:
-      - 'prod'
-      - 'dev'
-      - 'stage'
+      - prod
+      - dev
+      - stage
 
 jobs:
   deploy_to_prod:
@@ -14,14 +14,14 @@ jobs:
     steps:
     - name: Deploy to Azure Web App
       id: deploy-to-prodwebapp
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/prod' && github.repository == 'nikhatsultana639/deploydockerimage' }}
       uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
       with:
         app-name: ${{ env.PRODWEBAPP }}
         publish-profile: ${{ secrets.DEVNPRODWEBAPP }}
         images: 'nirulabs/tea:latest'
         package: .
-        startup-command: 'httpd-foreground'
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/prod' && github.repository == 'nikhatsultana639/deploydockerimage' }}  
+        startup-command: 'httpd-foreground'  
 
   deploy_to_dev:
     runs-on: ubuntu-latest
@@ -29,6 +29,7 @@ jobs:
     steps:
     - name: Deploy to Dev
       id: deploy-to-devwebapp
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' && github.repository == 'nikhatsultana639/deploydockerimage' }}
       uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
       with:
         app-name: ${{ env.DEVWEBAPP }}
@@ -36,7 +37,6 @@ jobs:
         images: 'nirulabs/tea:latest'
         package: .
         startup-command: 'httpd-foreground'
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' && github.repository == 'nikhatsultana639/deploydockerimage' }}
 
   deploy_to_stage:
     runs-on: ubuntu-latest
@@ -44,6 +44,7 @@ jobs:
     steps:
     - name: Deploy to Azure Web App
       id: deploy-to-stagewebapp
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/stage' && github.repository == 'nikhatsultana639/deploydockerimage' }}
       uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
       with:
         app-name: ${{ env.STAGEWEBAPP }}
@@ -51,4 +52,3 @@ jobs:
         images: 'nirulabs/tea:latest'
         package: .
         startup-command: 'httpd-foreground'
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/stage' && github.repository == 'nikhatsultana639/deploydockerimage' }}
